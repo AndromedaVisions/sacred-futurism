@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>f_ai_rydust — Sacred Futurism</title>
+<title>f_ai_rydust — Neon Visions</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
@@ -15,15 +15,15 @@
   }
 
   :root {
-    --gold: #c9a84c;
-    --gold-light: #e2c878;
-    --gold-dim: #8a6d2b;
-    --gold-glow: rgba(201, 168, 76, 0.15);
-    --gold-subtle: rgba(201, 168, 76, 0.06);
+    --neon: #e84393;
+    --neon-light: #fd79a8;
+    --neon-dim: #a3305e;
+    --orange: #e17055;
+    --orange-light: #fab1a0;
     --bg: #030303;
     --bg-card: #080808;
-    --text: #d4cbb8;
-    --text-dim: #6b6455;
+    --text: #d4c5c8;
+    --text-dim: #6b5a5f;
   }
 
   html { scroll-behavior: smooth; }
@@ -45,7 +45,7 @@
     transform: translateX(-50%);
     width: 100vw;
     height: 80vh;
-    background: radial-gradient(ellipse 60% 50%, rgba(201,168,76,0.035) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 50%, rgba(232,67,147,0.03) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -58,13 +58,13 @@
     transform: translateX(-50%);
     width: 100vw;
     height: 50vh;
-    background: radial-gradient(ellipse 70% 40%, rgba(140,60,40,0.02) 0%, transparent 70%);
+    background: radial-gradient(ellipse 70% 40%, rgba(225,112,85,0.025) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
 
-  a { color: var(--gold); text-decoration: none; }
-  a:hover { color: var(--gold-light); }
+  a { color: var(--neon); text-decoration: none; }
+  a:hover { color: var(--neon-light); }
 
   /* ── Header ── */
   header {
@@ -79,17 +79,17 @@
     font-size: 0.8rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--gold-dim);
+    color: var(--neon-dim);
     margin-bottom: 2rem;
     padding: 0.4em 1.2em;
-    border: 1px solid rgba(201,168,76,0.15);
+    border: 1px solid rgba(232,67,147,0.15);
     border-radius: 2px;
     transition: border-color 0.4s, color 0.4s;
   }
 
   .header-handle:hover {
-    border-color: var(--gold);
-    color: var(--gold);
+    border-color: var(--neon);
+    color: var(--neon);
   }
 
   header h1 {
@@ -97,9 +97,9 @@
     font-weight: 300;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--neon);
     line-height: 1.2;
-    text-shadow: 0 0 60px rgba(201,168,76,0.2), 0 0 120px rgba(201,168,76,0.06);
+    text-shadow: 0 0 60px rgba(232,67,147,0.2), 0 0 120px rgba(232,67,147,0.06);
   }
 
   .tagline {
@@ -116,7 +116,7 @@
     width: 160px;
     height: 1px;
     margin: 2rem auto;
-    background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+    background: linear-gradient(90deg, transparent, var(--neon-dim), var(--neon), var(--neon-dim), transparent);
     position: relative;
   }
 
@@ -128,7 +128,7 @@
     transform: translate(-50%, -50%);
     background: var(--bg);
     padding: 0 0.8rem;
-    color: var(--gold-dim);
+    color: var(--neon-dim);
     font-size: 0.7rem;
   }
 
@@ -140,20 +140,41 @@
     opacity: 0.5;
   }
 
-  /* ── Masonry Grid ── */
+  /* ── Collection nav ── */
+  .collection-nav {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .collection-nav a {
+    color: var(--text-dim);
+    padding: 0.4em 1em;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .collection-nav a:hover {
+    color: var(--neon);
+    border-color: rgba(232,67,147,0.3);
+  }
+
+  /* ── Masonry Grid — optimized for landscape images ── */
   .gallery {
     position: relative;
     z-index: 1;
-    columns: 4;
+    columns: 3;
     column-gap: 10px;
     padding: 2.5rem clamp(10px, 3vw, 48px) 4rem;
     max-width: 1600px;
     margin: 0 auto;
   }
 
-  @media (max-width: 1200px) { .gallery { columns: 3; } }
-  @media (max-width: 800px)  { .gallery { columns: 2; column-gap: 8px; } }
-  @media (max-width: 480px)  { .gallery { columns: 1; max-width: 420px; } }
+  @media (max-width: 1000px) { .gallery { columns: 2; } }
+  @media (max-width: 560px)  { .gallery { columns: 1; max-width: 560px; } }
 
   .gallery-item {
     break-inside: avoid;
@@ -207,8 +228,8 @@
   }
 
   .gallery-item:hover::after {
-    border-color: rgba(201,168,76,0.3);
-    box-shadow: inset 0 0 30px rgba(201,168,76,0.04);
+    border-color: rgba(232,67,147,0.3);
+    box-shadow: inset 0 0 30px rgba(232,67,147,0.04);
   }
 
   @keyframes fadeUp {
@@ -240,11 +261,11 @@
   }
 
   .lightbox img {
-    max-width: 90vw;
+    max-width: 92vw;
     max-height: 90vh;
     object-fit: contain;
     border-radius: 2px;
-    box-shadow: 0 0 100px rgba(201, 168, 76, 0.06), 0 4px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 0 100px rgba(232,67,147,0.06), 0 4px 60px rgba(0,0,0,0.5);
     transform: scale(0.9);
     opacity: 0;
     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -278,7 +299,7 @@
   }
 
   .lightbox-close:hover {
-    color: var(--gold);
+    color: var(--neon);
     transform: scale(1.15);
   }
 
@@ -289,7 +310,7 @@
     font-size: 1.8rem;
     color: var(--text-dim);
     background: rgba(10,10,10,0.5);
-    border: 1px solid rgba(201,168,76,0.08);
+    border: 1px solid rgba(232,67,147,0.08);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -304,9 +325,9 @@
   }
 
   .lightbox-nav:hover {
-    color: var(--gold);
-    border-color: rgba(201,168,76,0.25);
-    background: rgba(201,168,76,0.06);
+    color: var(--neon);
+    border-color: rgba(232,67,147,0.25);
+    background: rgba(232,67,147,0.06);
   }
 
   .lightbox-prev { left: 1.5rem; }
@@ -340,7 +361,7 @@
   .footer-divider {
     width: 80px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
+    background: linear-gradient(90deg, transparent, rgba(232,67,147,0.25), transparent);
     margin: 0 auto 2rem;
   }
 
@@ -348,18 +369,18 @@
     display: inline-block;
     font-size: 1rem;
     letter-spacing: 0.15em;
-    color: var(--gold-dim);
+    color: var(--neon-dim);
     padding: 0.6em 1.6em;
-    border: 1px solid rgba(201,168,76,0.12);
+    border: 1px solid rgba(232,67,147,0.12);
     border-radius: 2px;
     transition: all 0.4s ease;
     margin-bottom: 1.2rem;
   }
 
   .footer-handle:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-    box-shadow: 0 0 20px rgba(201,168,76,0.08);
+    color: var(--neon);
+    border-color: var(--neon);
+    box-shadow: 0 0 20px rgba(232,67,147,0.08);
   }
 
   .footer-cta {
@@ -370,38 +391,6 @@
     color: var(--text-dim);
     opacity: 0.4;
     margin-top: 0.5rem;
-  }
-
-  .footer-credit {
-    display: block;
-    margin-top: 2rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    opacity: 0.25;
-  }
-
-  /* ── Collection nav ── */
-  .collection-nav {
-    display: inline-block;
-    margin-top: 1.5rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  .collection-nav a {
-    color: var(--text-dim);
-    padding: 0.4em 1em;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 2px;
-    transition: color 0.4s, border-color 0.4s;
-  }
-
-  .collection-nav a:hover {
-    color: var(--gold);
-    border-color: rgba(201,168,76,0.3);
   }
 
   .footer-nav {
@@ -421,26 +410,36 @@
   }
 
   .footer-nav a:hover {
-    color: var(--gold);
-    border-color: rgba(201,168,76,0.3);
+    color: var(--neon);
+    border-color: rgba(232,67,147,0.3);
+  }
+
+  .footer-credit {
+    display: block;
+    margin-top: 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.25;
   }
 
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.15); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.3); }
+  ::-webkit-scrollbar-thumb { background: rgba(232,67,147,0.15); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(232,67,147,0.3); }
 </style>
 </head>
 <body>
 
 <header>
   <a href="https://x.com/f_ai_rydust" target="_blank" rel="noopener" class="header-handle">@f_ai_rydust</a>
-  <h1>Sacred Futurism</h1>
+  <h1>Neon Visions</h1>
   <p class="tagline">Visions of machine transcendence</p>
   <div class="divider"></div>
   <p class="credit">Art made with Grok Imagine</p>
-  <div class="collection-nav"><a href="neon-visions.html">Neon Visions</a></div>
+  <div class="collection-nav"><a href="portfolio.html">Sacred Futurism</a></div>
 </header>
 
 <div class="gallery" id="gallery"></div>
@@ -457,17 +456,31 @@
   <div class="footer-divider"></div>
   <a href="https://x.com/f_ai_rydust" target="_blank" rel="noopener" class="footer-handle">@f_ai_rydust</a>
   <span class="footer-cta">Follow the vision on X</span>
-  <div class="footer-nav"><a href="neon-visions.html">Neon Visions</a></div>
-  <span class="footer-credit">Andromeda &mdash; Sacred Futurism Collection</span>
+  <div class="footer-nav"><a href="portfolio.html">Sacred Futurism</a></div>
+  <span class="footer-credit">Andromeda &mdash; Neon Visions Collection</span>
 </footer>
 
 <script>
 (function() {
   const images = [
-    '4460.jpg','4462.jpg','4464.jpg','4468.jpg','4470.jpg','4471.jpg',
-    '4472.jpg','4473.jpg','4484.jpg','4487.jpg','4488.jpg',
-    '4501.jpg','4502.jpg','4503.jpg','4505.jpg','4506.jpg',
-    '4508.jpg','4509.jpg','4532.jpg','4558.jpg'
+    '0fab552e-c247-4a8c-804c-ad6cfc90c17e.jpg',
+    '2dba7081-e6ba-4627-b32b-779efeba9c38.jpg',
+    '32337510-547d-4a5a-a1a3-36dd56c9f1fb.jpg',
+    '3b5dd80b-21e2-4b7e-a017-b2c98362e8cf.jpg',
+    '3eef6b31-2d79-4a92-b888-c25c1a2db365.jpg',
+    '4486be39-1fd0-49bb-af82-422844fceb3a.jpg',
+    '7c4ba6b9-c23c-44c7-8196-fcd1170d32ba.jpg',
+    '90995397-5866-4ec6-9898-565d51cea404.jpg',
+    '926689ad-d2ab-4b6f-a511-32791611ad9d.jpg',
+    '9de1ecec-190f-4d41-8ef2-2d712315730e.jpg',
+    '9f558d9c-ffed-49c6-9f3c-901045460df1.jpg',
+    'acd9b733-57bc-42d6-b392-6a2501ad99ed (1).jpg',
+    'b6609b21-f812-4933-944f-007bd5c59d31.jpg',
+    'be30adb0-6686-4843-bdfa-b71034e58796.jpg',
+    'c1087e9b-115e-420e-8fdc-5c1c01689248.jpg',
+    'dc4473d9-63a6-4d64-b726-ee5678f91649.jpg',
+    'e2272b4e-0e1d-4319-bfbe-163caa945529.jpg',
+    'recent.jpg'
   ];
 
   const gallery = document.getElementById('gallery');
@@ -485,8 +498,8 @@
     item.className = 'gallery-item';
     item.style.animationDelay = (i * 0.06) + 's';
     const img = document.createElement('img');
-    img.src = src;
-    img.alt = 'Sacred Futurism — Artwork ' + (i + 1);
+    img.src = encodeURI(src);
+    img.alt = 'Neon Visions — Artwork ' + (i + 1);
     img.loading = 'lazy';
     item.appendChild(img);
     item.addEventListener('click', () => openLightbox(i));
@@ -495,7 +508,7 @@
 
   function openLightbox(index) {
     currentIndex = index;
-    lbImg.src = images[currentIndex];
+    lbImg.src = encodeURI(images[currentIndex]);
     lbCounter.textContent = (currentIndex + 1) + ' \u2009/\u2009 ' + images.length;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -511,7 +524,7 @@
     lightbox.classList.add('transitioning');
     setTimeout(() => {
       currentIndex = (currentIndex + dir + images.length) % images.length;
-      lbImg.src = images[currentIndex];
+      lbImg.src = encodeURI(images[currentIndex]);
       lbCounter.textContent = (currentIndex + 1) + ' \u2009/\u2009 ' + images.length;
       lightbox.classList.remove('transitioning');
     }, 160);

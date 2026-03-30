@@ -382,6 +382,49 @@
     opacity: 0.25;
   }
 
+  /* ── Collection nav ── */
+  .collection-nav {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .collection-nav a {
+    color: var(--text-dim);
+    padding: 0.4em 1em;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .collection-nav a:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.3);
+  }
+
+  .footer-nav {
+    display: block;
+    margin-top: 1.8rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .footer-nav a {
+    color: var(--text-dim);
+    padding: 0.4em 1em;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    transition: color 0.4s, border-color 0.4s;
+  }
+
+  .footer-nav a:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.3);
+  }
+
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
@@ -397,6 +440,7 @@
   <p class="tagline">Visions of machine transcendence</p>
   <div class="divider"></div>
   <p class="credit">Art made with Grok Imagine</p>
+  <div class="collection-nav"><a href="neon-visions.html">Neon Visions</a></div>
 </header>
 
 <div class="gallery" id="gallery"></div>
@@ -413,6 +457,7 @@
   <div class="footer-divider"></div>
   <a href="https://x.com/f_ai_rydust" target="_blank" rel="noopener" class="footer-handle">@f_ai_rydust</a>
   <span class="footer-cta">Follow the vision on X</span>
+  <div class="footer-nav"><a href="neon-visions.html">Neon Visions</a></div>
   <span class="footer-credit">Andromeda &mdash; Sacred Futurism Collection</span>
 </footer>
 
