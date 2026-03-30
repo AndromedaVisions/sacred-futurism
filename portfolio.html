@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>f_ai_rydust — Sacred Futurism</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e2c878;
+    --gold-dim: #8a6d2b;
+    --gold-glow: rgba(201, 168, 76, 0.15);
+    --gold-subtle: rgba(201, 168, 76, 0.06);
+    --bg: #030303;
+    --bg-card: #080808;
+    --text: #d4cbb8;
+    --text-dim: #6b6455;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Ambient background effects ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 80vh;
+    background: radial-gradient(ellipse 60% 50%, rgba(201,168,76,0.035) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 50vh;
+    background: radial-gradient(ellipse 70% 40%, rgba(140,60,40,0.02) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { color: var(--gold-light); }
+
+  /* ── Header ── */
+  header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 5rem 2rem 1rem;
+  }
+
+  .header-handle {
+    display: inline-block;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 2rem;
+    padding: 0.4em 1.2em;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 2px;
+    transition: border-color 0.4s, color 0.4s;
+  }
+
+  .header-handle:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  header h1 {
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.2;
+    text-shadow: 0 0 60px rgba(201,168,76,0.2), 0 0 120px rgba(201,168,76,0.06);
+  }
+
+  .tagline {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .divider {
+    width: 160px;
+    height: 1px;
+    margin: 2rem auto;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-dim), transparent);
+    position: relative;
+  }
+
+  .divider::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg);
+    padding: 0 0.8rem;
+    color: var(--gold-dim);
+    font-size: 0.7rem;
+  }
+
+  .credit {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  /* ── Masonry Grid ── */
+  .gallery {
+    position: relative;
+    z-index: 1;
+    columns: 4;
+    column-gap: 10px;
+    padding: 2.5rem clamp(10px, 3vw, 48px) 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1200px) { .gallery { columns: 3; } }
+  @media (max-width: 800px)  { .gallery { columns: 2; column-gap: 8px; } }
+  @media (max-width: 480px)  { .gallery { columns: 1; max-width: 420px; } }
+
+  .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--bg-card);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @media (max-width: 800px) { .gallery-item { margin-bottom: 8px; } }
+
+  .gallery-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                filter 0.7s ease;
+    filter: brightness(0.85) saturate(0.92);
+  }
+
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3) 100%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.04);
+    filter: brightness(1.0) saturate(1.1);
+  }
+
+  .gallery-item:hover::after {
+    border-color: rgba(201,168,76,0.3);
+    box-shadow: inset 0 0 30px rgba(201,168,76,0.04);
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Lightbox ── */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.45s ease, background 0.45s ease, backdrop-filter 0.45s ease, visibility 0s 0.45s;
+    cursor: zoom-out;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+    background: rgba(3, 3, 3, 0.95);
+    backdrop-filter: blur(24px);
+    transition: opacity 0.45s ease, background 0.45s ease, backdrop-filter 0.45s ease, visibility 0s 0s;
+  }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow: 0 0 100px rgba(201, 168, 76, 0.06), 0 4px 60px rgba(0,0,0,0.5);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.45s ease;
+  }
+
+  .lightbox.active img {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .lightbox.transitioning img {
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-size: 1.6rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    background: none;
+    border: none;
+    font-family: inherit;
+    line-height: 1;
+    z-index: 1001;
+  }
+
+  .lightbox-close:hover {
+    color: var(--gold);
+    transform: scale(1.15);
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    color: var(--text-dim);
+    background: rgba(10,10,10,0.5);
+    border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    font-family: inherit;
+    z-index: 1001;
+    user-select: none;
+  }
+
+  .lightbox-nav:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.25);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+
+  @media (max-width: 600px) {
+    .lightbox-nav { width: 40px; height: 40px; font-size: 1.4rem; }
+    .lightbox-prev { left: 0.75rem; }
+    .lightbox-next { right: 0.75rem; }
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    color: var(--text-dim);
+    z-index: 1001;
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 2rem 4rem;
+  }
+
+  .footer-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
+    margin: 0 auto 2rem;
+  }
+
+  .footer-handle {
+    display: inline-block;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold-dim);
+    padding: 0.6em 1.6em;
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 2px;
+    transition: all 0.4s ease;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-handle:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(201,168,76,0.08);
+  }
+
+  .footer-cta {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.4;
+    margin-top: 0.5rem;
+  }
+
+  .footer-credit {
+    display: block;
+    margin-top: 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    opacity: 0.25;
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.15); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201,168,76,0.3); }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://x.com/f_ai_rydust" target="_blank" rel="noopener" class="header-handle">@f_ai_rydust</a>
+  <h1>Sacred Futurism</h1>
+  <p class="tagline">Visions of machine transcendence</p>
+  <div class="divider"></div>
+  <p class="credit">Art made with Grok Imagine</p>
+</header>
+
+<div class="gallery" id="gallery"></div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lb-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+  <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Next">&#8250;</button>
+  <img id="lb-img" src="" alt="Artwork">
+  <div class="lightbox-counter" id="lb-counter"></div>
+</div>
+
+<footer>
+  <div class="footer-divider"></div>
+  <a href="https://x.com/f_ai_rydust" target="_blank" rel="noopener" class="footer-handle">@f_ai_rydust</a>
+  <span class="footer-cta">Follow the vision on X</span>
+  <span class="footer-credit">Andromeda &mdash; Sacred Futurism Collection</span>
+</footer>
+
+<script>
+(function() {
+  const images = [
+    '4460.jpg','4462.jpg','4464.jpg','4468.jpg','4470.jpg','4471.jpg',
+    '4472.jpg','4473.jpg','4484.jpg','4487.jpg','4488.jpg',
+    '4501.jpg','4502.jpg','4503.jpg','4505.jpg','4506.jpg',
+    '4508.jpg','4509.jpg','4532.jpg','4558.jpg'
+  ];
+
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbClose = document.getElementById('lb-close');
+  const lbPrev = document.getElementById('lb-prev');
+  const lbNext = document.getElementById('lb-next');
+  const lbCounter = document.getElementById('lb-counter');
+  let currentIndex = 0;
+
+  /* Build gallery with staggered reveal */
+  images.forEach((src, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.style.animationDelay = (i * 0.06) + 's';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'Sacred Futurism — Artwork ' + (i + 1);
+    img.loading = 'lazy';
+    item.appendChild(img);
+    item.addEventListener('click', () => openLightbox(i));
+    gallery.appendChild(item);
+  });
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lbImg.src = images[currentIndex];
+    lbCounter.textContent = (currentIndex + 1) + ' \u2009/\u2009 ' + images.length;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightbox.classList.remove('transitioning');
+    document.body.style.overflow = '';
+  }
+
+  function navigate(dir) {
+    lightbox.classList.add('transitioning');
+    setTimeout(() => {
+      currentIndex = (currentIndex + dir + images.length) % images.length;
+      lbImg.src = images[currentIndex];
+      lbCounter.textContent = (currentIndex + 1) + ' \u2009/\u2009 ' + images.length;
+      lightbox.classList.remove('transitioning');
+    }, 160);
+  }
+
+  lbClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+  lbPrev.addEventListener('click', (e) => { e.stopPropagation(); navigate(-1); });
+  lbNext.addEventListener('click', (e) => { e.stopPropagation(); navigate(1); });
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+
+  /* Touch swipe support for lightbox */
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
